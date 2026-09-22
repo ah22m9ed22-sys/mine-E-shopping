@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/all.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/tailwind.js"></script>
+    
+</head>
+<body class="bg-gradient-to-b from-blue-400 via-violet-300 to-cyan-200 w-full min-h-[2000px] ">
+    <main class="w-[90%] h-16 rounded-lg shadow-lg fixed left-[5%] top-6 bg-blue-100 px-3 flex items-center">
+        <div class="logo-main h-full w-[24%] pl-2 text-3xl font-extrabold text-blue-700 flex items-center">E-Market Shp</div>
+        <div class="search-box relative w-96 h-full bg-blue-100 rounded-3xl flex items-center p-1" id="searchBox"><button type="button" class="search-button" id="searchButton" aria-label="Open search"><i class="fa-solid fa-magnifying-glass font-bold text-2xl mx-2 text-blue-500"></i></button><input type="search" class="search-input w-full bg-blue-100 outline-0 focus:outline-none px-3" id="searchInput" aria-label="Search products"></div>
+        <div class="list-main w-[45%] h-full px-4 ">
+            <ul class="flex justify-center items-center h-full text-lg font-semibold text-blue-700 text-center ">
+                <li class="ml-5 cursor-pointer"><a href="index.html">Home</a></li>
+                <li class="ml-5 cursor-pointer">About</li>
+                <li class="ml-5 cursor-pointer">Contact</li>
+                <li class="ml-5 cursor-pointer"><a href="cartproducts.html">Cart</a></li>
+                <li class="ml-5 cursor-pointer">Products</li>
+                <li class="ml-5 cursor-pointer">Blog</li>
+            </ul>
+        </div>
+        <div class="user-main h-full w-[30%] flex justify-end items-center">
+            <div class="user-info hidden flex items-center justify-around" id="userInfo">
+                <div class="cart relative flex items-center flex-col">
+                    <i class="fas fa-shopping-cart relative text-2xl text-blue-600 mx-2 cursor-pointer hover:text-blue-800 active:text-blue-300" id="cartShowMena"></i>
+                <div id="showCart" class="show-cart absolute w-[250px] rounded-2xl min-h-[80px] bg-white shadow-xl  hidden p-4 left-[-75px] max-h-[500px] overflow-y-auto top-8">
+                        <div class="mass-empty m-2 text-md text-center text-black font-extralight capitalize" id="nameOfProducts">your cart is empty</div>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 active:bg-blue-300 ml-[14%]" ><a href="cartproducts.html">Show All Products</a></button>
+                    </div>
+                </div>
+                <i class="fa-solid fa-circle-user text-2xl text-blue-500 mx-2"></i>
+                <div class="text-lg font-semibold text-blue-700" id="userInfoName"></div>
+                <button class="bg-red-500 text-white px-4 py-2 m-2 rounded-lg hover:bg-red-600 active:bg-red-300" id="logoutButton">Logout</button>
+            </div>
+            <div class="linls " id="linksHome">
+                <button class="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 active:bg-blue-300"><a href="login.html">Login</a></button>
+            <button class="bg-blue-700 text-white px-4 py-2 rounded-lg ml-3 hover:bg-blue-800 active:bg-blue-300"><a href="register.html">Sign Up</a></button>
+            </div>
+        </div>
+    </main>
+    <section class="main-products w-[90%] min-h-[400px] m-auto p-3 mt-32">
+        <div class="products-container grid grid-cols-5 gap-5" id="productsContainer">
+            
+        </div>
+    </section>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+@import "tailwindcss";
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.User-infor{
+display: none;
+}
+.search-box::after{
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #3b82f6;
+    margin-left: 15%;
+    margin-bottom: 4%;
+    transition: width 300ms ease, left 300ms ease;
+}
+.search-box:focus-within::after{
+    left: 0;
+    width: 80%;
+
+}
+.search-button{
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+.search-box .search-input{
+    width: 0;
+    opacity: 0;
+    padding-left: 0;
+    padding-right: 0;
+    transition: width 300ms ease, opacity 300ms ease, padding 300ms ease;
+}
+.search-box.is-open .search-input{
+    width: 100%;
+    opacity: 1;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+.search-box.is-open::after{
+    left: 0;
+    width: 80%;
+}
