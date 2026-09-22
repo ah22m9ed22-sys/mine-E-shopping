@@ -9,6 +9,12 @@ let faveProductsContainer= document.getElementById("productsFaveContainer");
 let searchBox = document.getElementById("searchBox");
 let searchButton = document.getElementById("searchButton");
 let searchInput = document.getElementById("searchInput");
+let productDetailsModal = document.getElementById("productDetailsModal");
+let closeDetailsButton = document.getElementById("closeDetailsButton");
+let detailsProductImage = document.getElementById("detailsProductImage");
+let detailsProductName = document.getElementById("detailsProductName");
+let detailsProductTitle = document.getElementById("detailsProductTitle");
+let detailsProductPrice = document.getElementById("detailsProductPrice");
 let cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
 let faveProducts = JSON.parse(localStorage.getItem("faveProducts")) || [];
 
@@ -33,6 +39,28 @@ function matchesSearch(item) {
     return item.name.toLowerCase().includes(searchValue) ||
         item.title.toLowerCase().includes(searchValue);
 }
+
+function showProductDetails(id) {
+    let product = [...cartProducts, ...faveProducts].find(item => item.id === id);
+    if (!product) return;
+    detailsProductImage.src = product.image;
+    detailsProductImage.alt = product.name;
+    detailsProductName.textContent = product.name;
+    detailsProductTitle.textContent = product.title;
+    detailsProductPrice.textContent = `${product.price}$`;
+    productDetailsModal.classList.add("is-visible");
+    productDetailsModal.setAttribute("aria-hidden", "false");
+}
+
+function closeProductDetails() {
+    productDetailsModal.classList.remove("is-visible");
+    productDetailsModal.setAttribute("aria-hidden", "true");
+}
+
+closeDetailsButton.addEventListener("click", closeProductDetails);
+productDetailsModal.addEventListener("click", event => {
+    if (event.target === productDetailsModal) closeProductDetails();
+});
 //تفعيل الاحساب عن طريق التاكد من الذاكره المحلية
 
 
@@ -47,6 +75,10 @@ const showEmptyCartMessage = () => {
 }
 const showEmptyFaveMessage = () => {
     return `<p class="text-3xl p-5 font-bold text-red-500">your favorite products are empty</p>`;
+}
+const showNoSearchResults = () => {
+    let searchValue = searchInput.value.trim();
+    return `<p class="no-results col-span-full text-center text-xl font-bold text-white p-8">No products found for "${searchValue}"</p>`;
 }
 //رندرت العناصر والمنتجات للصفحه الرائيسية
 function renderProducts(){
@@ -69,6 +101,7 @@ function renderProducts(){
                     </span>
                 </div>
                 <div class ="flex flex-col justify-center items-center gap-2">
+                <button class="details-button" type="button" onclick="showProductDetails(${item.id})">Details</button>
                 <div class="w-16 h-8 rounded-xl px-2 py-1 flex justify-between items-center ">
                 <button class="flex items-center justify-center text-xl font-bold active:text-blue-600 cursor-pointer hover:text-green-500 addOne" onclick="addOneMore(${item.id})">+</button>
                 <div class="flex items-center justify-center text-xl font-bold text-green-500" >${item.qyn}</div>
@@ -83,6 +116,8 @@ function renderProducts(){
     productsCartContainer.innerHTML = x;
     if(cartProducts.length <= 0) {
         productsCartContainer.innerHTML = showEmptyCartMessage();
+    } else if(filteredCartProducts.length <= 0) {
+        productsCartContainer.innerHTML = showNoSearchResults();
     }
 }
 renderProducts();
@@ -140,6 +175,7 @@ function renderFaveProducts(){
                 </div>
 
                 <div class ="flex flex-col justify-center items-center gap-2">
+                <button class="details-button" type="button" onclick="showProductDetails(${item.id})">Details</button>
                 <button class="w-16 h-8 text-white bg-red-500  font-bold rounded-2xl ItemCartBtn" onclick="deleteTheItemFave(${item.id})">Remove</button>
                 </div>
                     
@@ -149,6 +185,8 @@ function renderFaveProducts(){
     faveProductsContainer.innerHTML = x;
     if(faveProducts.length <= 0) {
         faveProductsContainer.innerHTML = showEmptyFaveMessage();
+    } else if(filteredFaveProducts.length <= 0) {
+        faveProductsContainer.innerHTML = showNoSearchResults();
     }
 }
 renderFaveProducts();

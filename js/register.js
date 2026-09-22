@@ -6,8 +6,14 @@ let errorMessageReg = document.getElementById("ErrorMessageReg")
 let successMessageReg = document.getElementById("SuccessMessageReg")
 let signUpButton = document.getElementById("SignUpButton")
 
+async function hashPassword(password) {
+    let encodedPassword = new TextEncoder().encode(password);
+    let hashBuffer = await crypto.subtle.digest("SHA-256", encodedPassword);
+    return Array.from(new Uint8Array(hashBuffer), byte => byte.toString(16).padStart(2, "0")).join("");
+}
+
 // Function to handle user registration
-function handleRegistration(e) {
+async function handleRegistration(e) {
     e.preventDefault(); // Prevent form submission
     let userName = userNameReg.value.trim();
     let email = emailReg.value.trim();
@@ -25,7 +31,7 @@ function handleRegistration(e) {
         let user = {
             userName: userName,
             email: email,
-            password: password
+            password: await hashPassword(password)
         };
         localStorage.setItem("user", JSON.stringify(user));
         successMessageReg.textContent = "Registration successful!";

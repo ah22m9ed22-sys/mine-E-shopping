@@ -3,8 +3,15 @@ let passwordLog =document.getElementById("PasswordLogin")
 let loginButton = document.getElementById("LoginButton")
 let errorMessageLog = document.getElementById("ErrorMessageLog")
 let successMessageLog = document.getElementById("SuccessMessageLog")
+
+async function hashPassword(password) {
+    let encodedPassword = new TextEncoder().encode(password);
+    let hashBuffer = await crypto.subtle.digest("SHA-256", encodedPassword);
+    return Array.from(new Uint8Array(hashBuffer), byte => byte.toString(16).padStart(2, "0")).join("");
+}
+
 //  Function to handle user login
-function handleUserLog(e){
+async function handleUserLog(e){
     e.preventDefault();
     let userName = userNameLog.value.trim();
     let password = passwordLog.value.trim();
@@ -23,7 +30,14 @@ if(!storgeDate){
     return;
 }
 let storeUser = JSON.parse(storgeDate)
-if(userName === storeUser.userName && password === storeUser.password){
+let passwordHash = await hashPassword(password);
+let isValidPassword = passwordHash === storeUser.password;
+if (!isValidPassword && password === storeUser.password) {
+    storeUser.password = passwordHash;
+    localStorage.setItem("user", JSON.stringify(storeUser));
+    isValidPassword = true;
+}
+if(userName === storeUser.userName && isValidPassword){
     successMessageLog.textContent = "Login successful! Redirecting..."
     setTimeout(()=>{window.location="index.html"},1500)
 }

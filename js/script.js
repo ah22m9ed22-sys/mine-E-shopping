@@ -14,6 +14,12 @@ let mineCart = []
 let searchBox = document.getElementById("searchBox");
 let searchButton = document.getElementById("searchButton");
 let searchInput = document.getElementById("searchInput");
+let productDetailsModal = document.getElementById("productDetailsModal");
+let closeDetailsButton = document.getElementById("closeDetailsButton");
+let detailsProductImage = document.getElementById("detailsProductImage");
+let detailsProductName = document.getElementById("detailsProductName");
+let detailsProductTitle = document.getElementById("detailsProductTitle");
+let detailsProductPrice = document.getElementById("detailsProductPrice");
 
 searchButton.addEventListener("click", () => {
     searchBox.classList.toggle("is-open");
@@ -25,6 +31,28 @@ searchButton.addEventListener("click", () => {
 });
 
 searchInput.addEventListener("input", renderProducts);
+
+function showProductDetails(id) {
+    let product = products.find(item => item.id === id);
+    if (!product) return;
+    detailsProductImage.src = product.image;
+    detailsProductImage.alt = product.name;
+    detailsProductName.textContent = product.name;
+    detailsProductTitle.textContent = product.title;
+    detailsProductPrice.textContent = `${product.price}$`;
+    productDetailsModal.classList.add("is-visible");
+    productDetailsModal.setAttribute("aria-hidden", "false");
+}
+
+function closeProductDetails() {
+    productDetailsModal.classList.remove("is-visible");
+    productDetailsModal.setAttribute("aria-hidden", "true");
+}
+
+closeDetailsButton.addEventListener("click", closeProductDetails);
+productDetailsModal.addEventListener("click", event => {
+    if (event.target === productDetailsModal) closeProductDetails();
+});
 
 let products = [
     {id:1, title:"Slim wireless keyboard and mouse set with compact design", qyn:0, name:"Wireless Keyboard and Mouse Combo", price:100, image:"img/1.jpg"},
@@ -142,6 +170,7 @@ function renderProducts(){
                     </span>
                 </div>
                 <div class="btns flex justify-evenly items-center py-4">
+                    <button class="details-button" type="button" onclick="showProductDetails(${item.id})">Details</button>
                     <button
                         class="w-16 h-10 text-white font-bold rounded-3xl ItemCartBtn
                         ${inCart ? "bg-red-500 w-20" : "bg-blue-500"}"
@@ -153,7 +182,7 @@ function renderProducts(){
             </div>
         `;
     }).join("");
-    proudctsContainer.innerHTML = x;
+    proudctsContainer.innerHTML = x || `<p class="no-results col-span-full text-center text-xl font-bold text-white p-8">No products found for "${searchValue}"</p>`;
 }
 renderProducts();
 
