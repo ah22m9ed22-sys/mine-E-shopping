@@ -46,3 +46,190 @@ display: none;
     left: 0;
     width: 80%;
 }
+
+.products-container{
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+@media (max-width: 1100px){
+    body > main{
+        height: auto;
+        min-height: 7.5rem;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        padding: 0.5rem;
+    }
+    body > main .logo-main{
+        order: 1;
+        width: 45%;
+        height: 2.25rem;
+        padding-left: 0;
+        font-size: 1.35rem;
+    }
+    body > main .search-box{
+        order: 2;
+        width: 12%;
+        height: 2.25rem;
+    }
+    body > main .user-main{
+        order: 3;
+        width: 40%;
+        height: 2.25rem;
+    }
+    body > main .list-main{
+        order: 4;
+        width: 100%;
+        height: 1.75rem;
+        padding: 0;
+    }
+    body > main .list-main ul{
+        gap: 0.25rem 0.6rem;
+        font-size: 0.75rem;
+    }
+    body > main .list-main li{
+        margin-left: 0;
+    }
+    body > main .linls button,
+    body > main .user-info button{
+        padding: 0.35rem 0.55rem;
+        font-size: 0.75rem;
+    }
+    .main-products,
+    .main-fave{
+        margin-top: 10rem !important;
+    }
+    .products-container{
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0.75rem !important;
+    }
+    .products-container .product-item{
+        min-width: 0 !important;
+    }
+    .products-container .imge-item{
+        height: 9rem;
+        min-height: 0;
+    }
+    .products-container .imge-item img{
+        object-fit: contain;
+    }
+    .logo-main{
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 768px){
+    body{
+        overflow-x: hidden;
+    }
+    body > main{
+        position: absolute;
+        top: 1rem;
+        left: 5%;
+        width: 90%;
+        height: auto;
+        min-height: 12rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.25rem;
+        padding: 0.5rem;
+    }
+    body > main .logo-main,
+    body > main .search-box,
+    body > main .list-main,
+    body > main .user-main{
+        width: 100%;
+    }
+    body > main .logo-main{
+        height: 2rem;
+        justify-content: center;
+        padding-left: 0;
+        font-size: 1.35rem;
+    }
+    body > main .search-box{
+        height: 2.25rem;
+    }
+    body > main .list-main{
+        height: auto;
+        padding: 0;
+    }
+    body > main .list-main ul{
+        flex-wrap: wrap;
+        gap: 0.2rem 0.65rem;
+        font-size: 0.75rem;
+    }
+    body > main .list-main li{
+        margin-left: 0;
+    }
+    body > main .user-main{
+        height: auto;
+        justify-content: center;
+    }
+    body > main .user-info,
+    body > main .linls{
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+    body > main .user-info button{
+        margin: 0.25rem;
+    }
+    body > main .linls button,
+    body > main .user-info button{
+        padding: 0.45rem 0.75rem;
+        font-size: 0.85rem;
+    }
+    .main-products,
+    .main-fave{
+        margin-top: 14rem !important;
+    }
+    .products-container{
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0.75rem !important;
+    }
+    .products-container .product-item{
+        min-width: 0 !important;
+        width: 100%;
+        max-width: 100%;
+        min-height: 20rem;
+    }
+    .products-container .imge-item{
+        width: 100%;
+        height: 8rem;
+        min-height: 0;
+    }
+    .products-container .imge-item img{
+        object-fit: contain;
+        max-height: 100%;
+    }
+    .product-item .decl-item{
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    .product-item h2{
+        font-size: 1rem;
+        line-height: 1.25rem;
+    }
+    .product-item p{
+        font-size: 0.85rem;
+        line-height: 1.1rem;
+    }
+    .product-item span{
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px){
+    .products-container{
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+    .products-container .product-item{
+        min-height: 22rem;
+    }
+    .products-container .imge-item{
+        height: 10rem;
+    }
+    .main-products,
+    .main-fave{
+        margin-top: 14rem !important;
+    }
+}
